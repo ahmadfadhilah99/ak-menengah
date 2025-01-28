@@ -226,26 +226,27 @@ main .content2 .content-description button:hover {
 
 
 
-/* content 3*/
+/* content 3 */
 main .content3 {
     padding: 6rem 0 10rem 0;
     align-items: center; 
+    background-color: #f9f9f9; /* Menambahkan latar belakang yang lembut */
 }
 
 main .content3 .content-description {
     text-align: center;
-    
 }
 
 main .content3 .content-description .title {
     margin-block: 1rem;
-    font-size: 2rem;
+    font-size: 2.5rem; /* Meningkatkan ukuran font judul */
+    color: #333; /* Mengubah warna teks */
 }
 
 main .content3 .content-software {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.2rem;
+    gap: 1.5rem; /* Menambah jarak antar item */
     justify-content: center;
     padding: 50px 0;
 }
@@ -253,20 +254,28 @@ main .content3 .content-software {
 main .content3 .content-software .software {
     width: calc((80% / 3) - 10px);
     min-width: 250px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Meningkatkan bayangan */
+    border-radius: 10px; /* Membuat sudut lebih bulat */
     padding: 20px;
     margin: auto;
     text-align: center;
+    transition: transform 0.2s; /* Menambahkan transisi untuk efek hover */
 }
 
-
-main .content3 .content-software .software img{
-    width: 90px;
+main .content3 .content-software .software:hover {
+    transform: translateY(-5px); /* Efek mengangkat saat hover */
 }
 
-main .content3 .content-software .software .title{
-    font-size: 1.2rem;
+main .content3 .content-software .software img {
+    width: 90px; 
+    height: 90px; 
+    object-fit: contain; 
+    margin-bottom: 1rem; /* Menambahkan jarak di bawah gambar */
+}
+
+main .content3 .content-software .software .title {
+    font-size: 1.6rem; /* Meningkatkan ukuran font judul software */
+    color: #555; /* Mengubah warna teks */
 }
 
 main .content3 .content-software .software button {
@@ -282,14 +291,14 @@ main .content3 .content-software .software button {
     font-weight: 700;
     color: white;
     cursor: pointer;
-    transition: all 0.15s ease-in;
+    transition: all 0.3s ease-in-out; /* Menambahkan transisi yang lebih halus */
 }
-
 
 main .content3 .content-software .software button:hover {
     border: 3px solid #7376fe;
     background-color: transparent;
     color: #7376fe;
+    transform: scale(1.05); /* Efek memperbesar saat hover */
 }
 
 
