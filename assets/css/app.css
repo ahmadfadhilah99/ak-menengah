@@ -246,7 +246,7 @@ main .content3 .content-description .title {
 main .content3 .content-software {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem; /* Menambah jarak antar item */
+    gap: 5rem; /* Menambah jarak antar item */
     justify-content: center;
     padding: 50px 0;
 }
@@ -254,16 +254,16 @@ main .content3 .content-software {
 main .content3 .content-software .software {
     width: calc((80% / 3) - 10px);
     min-width: 250px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Meningkatkan bayangan */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Meningkatkan bayangan */
     border-radius: 10px; /* Membuat sudut lebih bulat */
     padding: 20px;
     margin: auto;
     text-align: center;
-    transition: transform 0.2s; /* Menambahkan transisi untuk efek hover */
+    transition: all 0.5s ease-in-out;
 }
 
 main .content3 .content-software .software:hover {
-    transform: translateY(-5px); /* Efek mengangkat saat hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Meningkatkan bayangan */
 }
 
 main .content3 .content-software .software img {
@@ -305,7 +305,7 @@ main .content3 .content-software .software button:hover {
 
 /* footer */
 footer {
-    background: url('../img/background3.png') no-repeat  ;
+    background: url('../img/background-footer.png') no-repeat  ;
     background-size: cover;
     margin-top: -60px;
 }
