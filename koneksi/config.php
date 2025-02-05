@@ -2,7 +2,7 @@
 
 
 $databaseHost = 'localhost';
-$databaseName = 'db_lab';
+$databaseName = 'db_labamen';
 $databaseUsername = 'root';
 $databasePassword = '';
 

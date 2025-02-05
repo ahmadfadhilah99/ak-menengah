@@ -1,3 +1,10 @@
+<?php
+  include_once('koneksi/config.php');
+
+  $data = mysqli_query($mysqli, "SELECT * FROM tbl_software WHERE status = 'aktif'");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,11 +29,10 @@
             </div>
             <nav class="nav-list">
               <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#tata">Tata Tertib</a></li>
-                <li><a href="#modul">Modul</a></li>
-                <li><a href="software.html">Software</a></li>
-                <li><a href="galeri.html">Galeri</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="tatatertib.php">Tata Tertib</a></li>
+                <li><a href="modul.php">Modul</a></li>
+                <li><a href="software.php">Software</a></li>
               </ul>
             </nav>
         </header>
@@ -35,14 +41,23 @@
             <!-- content 3 -->
             <div class="content3" >
               <div class="content-description">
-                <h1 class="title">Galeri</h1>
+                <h1 class="title">Software</h1>
               </div>
               <div class="content-software">
+              <?php
+                while ($software = mysqli_fetch_array($data)) {
+              ?>
+              
                 <div class="software">
-                  <img src="assets/img/MYOB_Logo.svg" alt="">
-                  <h1 class="title">MYOB</h1>
-                  <a href="https://drive.google.com/file/d/1g0PFyzvkXFuIUzj_P5EwhZp9LXxxgj-b/view?usp=drive_link" target="_blank"><button>Install Sekarang</button></a>
+                  <img src="assets/img/<?=$software['image']?>" alt="">
+                  <h1 class="title"><?=$software['nama_software']?></h1>
+                  <a href="<?=$software['link_software']?>" target="_blank"><button>Install Sekarang</button></a>
                 </div>
+              
+              <?php
+                }
+              ?>
+<!--               
                 <div class="software">
                   <img src="assets/img/LogoZahir.png" alt="">
                   <h1 class="title">ZAHIR</h1>
@@ -57,7 +72,7 @@
                   <img src="assets/img/acl-seeklogo.png" alt="">
                   <h1 class="title">ACL</h1>
                   <a href="https://drive.google.com/file/d/1CiR1rlfIHV1k-vSBHnL2eOGDgc5AsIfe/view?usp=drive_link" target="_blank"><button>Install Sekarang</button></a>
-                </div>
+                </div> -->
               </div>
             </div>
           </main>

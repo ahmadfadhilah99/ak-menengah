@@ -1,16 +1,16 @@
 <?php
-include_once('../koneksi/config.php');
+    include_once('../../koneksi/config.php');
 
-// // $data = mysqli_query($mysqli, "SELECT COUNT(*) as Jumlah FROM barang WHERE kategori='makanan'");
-$modul = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_modul");
-// $laporan_aktif = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_laporan WHERE status_laporan='aktif'");
-// $kk = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_akun WHERE id_role=3");
-// $users = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_akun");
-
-$jModul = mysqli_fetch_assoc($modul);
-// $twarga = mysqli_fetch_assoc($kk);
-// $tusers = mysqli_fetch_assoc($users);
-// $alaporan = mysqli_fetch_assoc($laporan_aktif);
+    if (isset($_POST['add'])) {
+        $nama = $_POST['nama'];
+        $link = $_POST['link'];
+        $status = $_POST['status'];
+    
+        $result = mysqli_query($mysqli, "INSERT INTO tbl_modul(nama_modul,link_modul,status) 
+        VALUES('$nama', '$link', '$status')");
+    
+        header('location:listModul.php?pesan=berhasiladd');
+    }
 ?>
 
 
@@ -25,17 +25,17 @@ $jModul = mysqli_fetch_assoc($modul);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ak-Menengah | Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.png">
+    <title>Ak-Menengah | Modul</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.png">
 
     <!-- Custom fonts for this template-->
-    <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -45,7 +45,7 @@ $jModul = mysqli_fetch_assoc($modul);
         session_start();
 
         if ($_SESSION['role'] == '') {
-            header("location:auth/login.php?pesan=gagal");
+            header("location:../auth/login.php?pesan=gagal");
         } 
 
     ?>
@@ -60,7 +60,7 @@ $jModul = mysqli_fetch_assoc($modul);
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon ">
-                    <img src="../assets/img/logo.png" alt="" width="60" >
+                    <img src="../../assets/img/logo.png" alt="" width="60" >
                 </div>
                 <div class="sidebar-brand-text mx-3">LABAMEN</div>
             </a>
@@ -70,8 +70,8 @@ $jModul = mysqli_fetch_assoc($modul);
 
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="dashboard.php">
+            <li class="nav-item">
+                <a class="nav-link" href="../dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -89,7 +89,7 @@ $jModul = mysqli_fetch_assoc($modul);
             ?>
             
             <li class="nav-item">
-                <a class="nav-link" href="akun/listAkun.php">
+                <a class="nav-link" href="../akun/listAkun.php">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Akun</span></a>
                 </li>
@@ -97,23 +97,23 @@ $jModul = mysqli_fetch_assoc($modul);
             <?php
                 }
                 ?>
-            <li class="nav-item">
-                <a class="nav-link" href="modul/listModul.php">
+            <li class="nav-item active">
+                <a class="nav-link" href="listModul.php">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Modul</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="software/listSoftware.php">
+                <a class="nav-link" href="../software/listSoftware.php">
                     <i class="fas fa-fw fa-desktop"></i>
                     <span>Software</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="galeri/listImage.php">
+                <a class="nav-link" href="../galeri/listImage.php">
                     <i class="fas fa-fw fa-image"></i>
                     <span>Galeri</span></a>
             </li>
 
-            <!-- Divider -->
+<!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -151,7 +151,7 @@ $jModul = mysqli_fetch_assoc($modul);
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['username']?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="../assets/img/undraw_profile.svg">
+                                    src="../../assets/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -169,83 +169,37 @@ $jModul = mysqli_fetch_assoc($modul);
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+                 <!-- Begin Page Content -->
+                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Tambah Modul</h1>
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
-                        <!-- Laporan Aktif -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                               Jumlah Asisten</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <!-- <?= $alaporan['jumlah'] ?> --> 60
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+                    <!-- Tambah Modul Praktikan -->
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <a href="listModul.php" class="mb-3 btn btn-secondary">Kembali <i class="fas fa-fw fa-arrow-right"></i></a>
+                            <form class="row g-3" action="addModul.php" method="POST">
+                                <div class="col-md-6">
+                                    <label for="formNama" class="form-label">Nama Modul</label>
+                                    <input type="text" class="form-control" id="formNama" name="nama" required>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Total Laporan -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Jumlah Modul
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                        <?= $jModul['jumlah'] ?> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+                                <div class="col-md-6">
+                                        <label for="formLink" class="form-label">Link Modul</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="formLink" name="link" required>
+                                    </div>  
                                 </div>
-                            </div>
-                        </div>
+                                <input type="text" class="form-control" id="formStatus" name="status" value="nonaktif" hidden>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Jumlah Aplikasi</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <!-- <?= $twarga['jumlah'] ?> --> 5 
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-database fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary mt-3" type="submit" name="add">Add Modul</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-
-                      
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -287,28 +241,28 @@ $jModul = mysqli_fetch_assoc($modul);
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="auth/logout.php">Logout</a>
+                    <a class="btn btn-primary" href="../auth/logout.php">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../assets/js/sb-admin-2.min.js"></script>
+    <script src="../../assets/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="../../assets/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../assets/js/demo/chart-area-demo.js"></script>
-    <script src="../assets/js/demo/chart-pie-demo.js"></script>
+    <script src="../../assets/js/demo/chart-area-demo.js"></script>
+    <script src="../../assets/js/demo/chart-pie-demo.js"></script>
 
 </body>
 

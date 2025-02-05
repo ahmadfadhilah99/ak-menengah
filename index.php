@@ -22,11 +22,10 @@
             </div>
             <nav class="nav-list">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#tata">Tata Tertib</a></li>
-                    <li><a href="modul.html">Modul</a></li>
-                    <li><a href="software.html">Software</a></li>
-                    <li><a href="galeri.html">Galeri</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="tatatertib.php">Tata Tertib</a></li>
+                    <li><a href="modul.php">Modul</a></li>
+                    <li><a href="software.php">Software</a></li>
                 </ul>
             </nav>
         </header>

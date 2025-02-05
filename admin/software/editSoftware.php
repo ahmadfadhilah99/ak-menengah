@@ -1,16 +1,52 @@
 <?php
-include_once('../koneksi/config.php');
+    include_once('../../koneksi/config.php');
 
-// // $data = mysqli_query($mysqli, "SELECT COUNT(*) as Jumlah FROM barang WHERE kategori='makanan'");
-$modul = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_modul");
-// $laporan_aktif = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_laporan WHERE status_laporan='aktif'");
-// $kk = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_akun WHERE id_role=3");
-// $users = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_akun");
+    $id = $_GET['id'];
+    $select = mysqli_query($mysqli, "SELECT * FROM tbl_software WHERE id_software = $id");
 
-$jModul = mysqli_fetch_assoc($modul);
-// $twarga = mysqli_fetch_assoc($kk);
-// $tusers = mysqli_fetch_assoc($users);
-// $alaporan = mysqli_fetch_assoc($laporan_aktif);
+    if (isset($_POST['edit'])) {
+        $id = $_POST['id'];
+        $nama = $_POST['nama'];
+        $link = $_POST['link'];
+        $status = $_POST['status'];
+        $gLama = $_POST['gambarLama'];
+
+        // gambarr baru
+        $ekstensi_diperbolehkan	= array('png','jpg','svg','jpeg');
+        $gBaru = $_FILES['gambarBaru']['name'];
+        $x = explode('.', $gBaru);
+        $ekstensi = strtolower(end($x));
+        $ukuran	= $_FILES['gambarBaru']['size'];
+        $file_tmp = $_FILES['gambarBaru']['tmp_name'];	
+        
+        if($gBaru == ''){
+            // mengubah data tanpa gambar baru
+            $result = mysqli_query($mysqli, "UPDATE `tbl_software` SET `id_software`='$id',`nama_software`='$nama',`link_software`='$link',`status`='$status',`image`='$gLama'
+            WHERE `id_software` = '$id'");
+
+        } else {
+            if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+                if($ukuran < 1044070){			
+                    move_uploaded_file($file_tmp, '../../assets/img/'.$gBaru);
+                    $result = mysqli_query($mysqli, "UPDATE `tbl_software` SET `id_software`='$id',`nama_software`='$nama',`link_software`='$link',`status`='$status',`image`='$gBaru'
+                    WHERE `id_software` = '$id'");
+                    if($query){
+                        echo 'FILE BERHASIL DI UPLOAD';
+                    }else{
+                        echo 'GAGAL MENGUPLOAD GAMBAR';
+                    }
+                }else{
+                    echo 'UKURAN FILE TERLALU BESAR';
+                }
+            }else{
+                echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN';
+            }
+        }
+
+        
+    
+        header('location:listSoftware.php?pesan=berhasiledit');
+    }
 ?>
 
 
@@ -25,17 +61,17 @@ $jModul = mysqli_fetch_assoc($modul);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ak-Menengah | Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.png">
+    <title>Ak-Menengah | Software</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.png">
 
     <!-- Custom fonts for this template-->
-    <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -45,7 +81,7 @@ $jModul = mysqli_fetch_assoc($modul);
         session_start();
 
         if ($_SESSION['role'] == '') {
-            header("location:auth/login.php?pesan=gagal");
+            header("location:../auth/login.php?pesan=gagal");
         } 
 
     ?>
@@ -60,7 +96,7 @@ $jModul = mysqli_fetch_assoc($modul);
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon ">
-                    <img src="../assets/img/logo.png" alt="" width="60" >
+                    <img src="../../assets/img/logo.png" alt="" width="60" >
                 </div>
                 <div class="sidebar-brand-text mx-3">LABAMEN</div>
             </a>
@@ -70,8 +106,8 @@ $jModul = mysqli_fetch_assoc($modul);
 
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="dashboard.php">
+            <li class="nav-item">
+                <a class="nav-link" href="../dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -89,7 +125,7 @@ $jModul = mysqli_fetch_assoc($modul);
             ?>
             
             <li class="nav-item">
-                <a class="nav-link" href="akun/listAkun.php">
+                <a class="nav-link" href="../akun/listAkun.php">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Akun</span></a>
                 </li>
@@ -98,17 +134,17 @@ $jModul = mysqli_fetch_assoc($modul);
                 }
                 ?>
             <li class="nav-item">
-                <a class="nav-link" href="modul/listModul.php">
+                <a class="nav-link" href="../modul/listModul.php">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Modul</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="software/listSoftware.php">
+            <li class="nav-item active">
+                <a class="nav-link" href="listSoftware.php">
                     <i class="fas fa-fw fa-desktop"></i>
                     <span>Software</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="galeri/listImage.php">
+                <a class="nav-link" href="../galeri/listImage.php">
                     <i class="fas fa-fw fa-image"></i>
                     <span>Galeri</span></a>
             </li>
@@ -151,7 +187,7 @@ $jModul = mysqli_fetch_assoc($modul);
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['username']?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="../assets/img/undraw_profile.svg">
+                                    src="../../assets/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -169,82 +205,73 @@ $jModul = mysqli_fetch_assoc($modul);
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+                 <!-- Begin Page Content -->
+                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Edit Software</h1>
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
-                        <!-- Laporan Aktif -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
+                    <!-- Edit Software Praktikan -->
+                    <?php
+                        while ($software = mysqli_fetch_array($select)) {
+                    ?>
+                    <form action="editSoftware.php?id=<?= $software['id_software']?>" method="POST" enctype="multipart/form-data">
+                            
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            <a href="listSoftware.php" class="mb-2 btn btn-secondary">Kembali <i class="fas fa-fw fa-arrow-right"></i></a>
+                            <div class="card shadow mb-4">
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                               Jumlah Asisten</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <!-- <?= $alaporan['jumlah'] ?> --> 60
-                                            </div>
+                                    <div class="row g-3">
+                                        <input type="number" class="form-control" id="formid" name="id" value="<?= $software['id_software']?>" hidden>
+                                        <div class="col-md-12">
+                                            <label for="formNama" class="form-label">Nama Software</label>
+                                            <input type="text" class="form-control" id="formNama" name="nama"  value="<?= $software['nama_software']?>" required>
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        <div class="col-md-12 mt-4">
+                                                <label for="formLink" class="form-label">Link Software</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="formLink" name="link"  value="<?= $software['link_software']?>" required>
+                                            </div>  
+                                        </div>
+                                        <div class="col-md-12 mt-4">
+                                            <label for="formStatus" class="form-label">Status</label>
+                                            <select class="form-control" id="formStatus" name="status" required>
+                                                <option value=""></option>
+                                                <option value="aktif">Aktif</option>
+                                                <option value="nonaktif">Nonaktif</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="card shadow mb-4 mt-5">
+                                <div class="card-body">
+                                    <div class="text-center mt-5">
+                                        <img src="../../assets/img/<?= $software['image']?>" alt="" width="250" height="90" >
+                                        <input type="text" name="gambarLama" value="<?= $software['image']?>" hidden>
+                                    </div>
+                                    <div class="mt-5">
+                                        <label for="formLink" class="form-label">Logo Software</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="gambarBaru">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Total Laporan -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Jumlah Modul
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                        <?= $jModul['jumlah'] ?> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Jumlah Aplikasi</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <!-- <?= $twarga['jumlah'] ?> --> 5 
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-database fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                      
                     </div>
+                    <button class="btn btn-warning" type="submit" name="edit">Edit Software</button>
+                    </form>
+                    <?php
+                        }
+                    ?>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -287,29 +314,36 @@ $jModul = mysqli_fetch_assoc($modul);
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="auth/logout.php">Logout</a>
+                    <a class="btn btn-primary" href="../auth/logout.php">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../assets/js/sb-admin-2.min.js"></script>
+    <script src="../../assets/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="../../assets/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../assets/js/demo/chart-area-demo.js"></script>
-    <script src="../assets/js/demo/chart-pie-demo.js"></script>
-
+    <script src="../../assets/js/demo/chart-area-demo.js"></script>
+    <script src="../../assets/js/demo/chart-pie-demo.js"></script>
+    
+    
+    <script>
+        $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 </body>
 
 </html>

@@ -1,36 +1,38 @@
 <?php
-session_start();
 
-include_once('Koneksi/config.php');
+include_once('../../koneksi/config.php');
 
 $username = $_POST['username'];
-// $password = $_POST['password'];
-$password = md5($_POST['password']);
 
-
-$login = mysqli_query($mysqli, "SELECT * FROM tbl_akun WHERE username='$username' and password='$password'");
-
+$login = mysqli_query($mysqli, "SELECT * FROM tbl_akun WHERE username='$username'");
 $cek = mysqli_num_rows($login);
 
 if ($cek > 0) {
     $data = mysqli_fetch_assoc($login);
-    if ($data['status'] == 'aktif') {
-        if ($data['id_role'] == '1') {
-            $_SESSION['username'] = $data['nama'];
-            $_SESSION['role'] = "admin";
-            header("location:admin/dashboard.php");
+    
+    if( password_verify($_POST['password'], $data['password']) ) {
+        session_start();
+        if ($data['status'] == 'aktif') {
+            if ($data['id_role'] == '1') {
+                $_SESSION['username'] = $data['nama_akun'];
+                $_SESSION['role'] = "admin";
+                header("location:../dashboard.php");
 
-        } else if ($data['id_role'] == '2') {
-            $_SESSION['username'] = $data['nama'];
-            $_SESSION['role'] = "programmer";
-            header("location:admin/dashboard.php");
+            } else if ($data['id_role'] == '2') {
+                $_SESSION['username'] = $data['nama_akun'];
+                $_SESSION['role'] = "programmer";
+                header("location:../dashboard.php");
 
+            } else {
+                header("location:login.php?pesan=gagal");
+            }
         } else {
-            header("location:index.php?pesan=gagal");
+            header("location:login.php?pesan=gagal");
         }
     } else {
-        header("location:index.php?pesan=gagal");
+        header("location:login.php?pesan=gagal");
     }
+
 } else {
-    header("location:index.php?pesan=gagal");
+    header("location:login.php?pesan=gagal");
 }
