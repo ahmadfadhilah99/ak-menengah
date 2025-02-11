@@ -14,7 +14,7 @@
         <title>Ak-Menengah</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
 
-        <link rel="stylesheet" href="assets/css/app.css">
+        <link rel="stylesheet" href="assets/css/app.css?v=1.4">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,23 +23,26 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        <header class="navbar-container1" id="navbar">
+    <header class="navbar-container1" id="navbar">
             <div class="logo">
                 <img src="assets/img/logo.png" alt="logo lab">
             </div>
-            <nav class="nav-list">
-              <ul>
+            <ul class="nav-links">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="tatatertib.php">Tata Tertib</a></li>
                 <li><a href="modul.php">Modul</a></li>
                 <li><a href="software.php">Software</a></li>
-              </ul>
-            </nav>
+            </ul>
+            <div class="menu-toggle">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>
         </header>
 
         <main>
             <!-- content 3 -->
-            <div class="content3" >
+            <div class="page-software" >
               <div class="content-description">
                 <h1 class="title">Software</h1>
               </div>
@@ -57,22 +60,6 @@
               <?php
                 }
               ?>
-<!--               
-                <div class="software">
-                  <img src="assets/img/LogoZahir.png" alt="">
-                  <h1 class="title">ZAHIR</h1>
-                  <a href="https://drive.google.com/file/d/1khxXJE4igkIqRMlpwUVxQsypC9pf1Mj3/view?usp=drive_link" target="_blank"><button>Install Sekarang</button></a>
-                </div>
-                <div class="software">
-                  <img src="assets/img/DEA4.ICO" alt="">
-                  <h1 class="title">DEA</h1>
-                  <a href="https://drive.google.com/file/d/1v7D9VXOdAvg-wFTdew6uilMW2ZbNRzo6/view?usp=drive_link" target="_blank"><button>Install Sekarang</button></a>
-                </div>
-                <div class="software">
-                  <img src="assets/img/acl-seeklogo.png" alt="">
-                  <h1 class="title">ACL</h1>
-                  <a href="https://drive.google.com/file/d/1CiR1rlfIHV1k-vSBHnL2eOGDgc5AsIfe/view?usp=drive_link" target="_blank"><button>Install Sekarang</button></a>
-                </div> -->
               </div>
             </div>
           </main>
@@ -85,6 +72,6 @@
             </div>
           </footer>
 
-          <script src="assets/js/main.js"></script>
+          <script src="assets/js/main.js?v=1.0"></script>
     </body>
 </html>

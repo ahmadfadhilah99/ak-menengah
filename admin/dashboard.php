@@ -1,16 +1,14 @@
 <?php
 include_once('../koneksi/config.php');
 
-// // $data = mysqli_query($mysqli, "SELECT COUNT(*) as Jumlah FROM barang WHERE kategori='makanan'");
+$akun = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_akun WHERE status ='aktif'");
 $modul = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_modul");
-// $laporan_aktif = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_laporan WHERE status_laporan='aktif'");
-// $kk = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_akun WHERE id_role=3");
-// $users = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_akun");
+$software = mysqli_query($mysqli, "SELECT COUNT(*) as jumlah FROM tbl_software");
 
+$jAkun = mysqli_fetch_assoc($akun);
 $jModul = mysqli_fetch_assoc($modul);
-// $twarga = mysqli_fetch_assoc($kk);
-// $tusers = mysqli_fetch_assoc($users);
-// $alaporan = mysqli_fetch_assoc($laporan_aktif);
+$jSoftware = mysqli_fetch_assoc($software);
+
 ?>
 
 
@@ -186,9 +184,9 @@ $jModul = mysqli_fetch_assoc($modul);
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                               Jumlah Asisten</div>
+                                               Jumlah Akun Aktif</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <!-- <?= $alaporan['jumlah'] ?> --> 60
+                                                <?= $jAkun['jumlah'] ?> 
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -232,7 +230,7 @@ $jModul = mysqli_fetch_assoc($modul);
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Jumlah Aplikasi</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <!-- <?= $twarga['jumlah'] ?> --> 5 
+                                                <?= $jSoftware['jumlah'] ?>
                                             </div>
                                         </div>
                                         <div class="col-auto">
