@@ -166,7 +166,7 @@ main .content {
 main .content .content-description {
     flex: 1 1;
     opacity: 0;
-    animation: fadeIn 4s forwards;
+    animation: fadeIn 3s forwards;
 }
 
 main .content .content-description .title {
@@ -269,6 +269,8 @@ main .content2 .content-description button:hover {
     color: #7376fe;
 }
 
+
+
 /* content 3 */
 main .content3{
     margin: 15rem 0 10rem 0;
@@ -319,7 +321,7 @@ main .content3 .maps .titik-maps .wrap-map iframe{
 
 /* Page Software*/
 main .page-software {
-    padding: 6rem 0 10rem 0;
+    padding: 6rem 0 4rem 0;
     align-items: center; 
 }
 
@@ -330,7 +332,7 @@ main .page-software .content-description {
 main .page-software .content-description .title {
     margin-block: 1rem;
     font-size: 2.5rem; /* Meningkatkan ukuran font judul */
-    color: #333; /* Mengubah warna teks */
+    color: #1a237e;
 }
 
 main .page-software .content-software {
@@ -392,6 +394,7 @@ main .page-software .content-software .software button:hover {
 }
 
 
+
 /* Page Tata Tertib */
 main .page-tatatertib {
     padding: 6rem 0 10rem 0;
@@ -405,7 +408,7 @@ main .page-tatatertib .content-description {
 main .page-tatatertib .content-description .title {
     margin-block: 1rem;
     font-size: 2.5rem; /* Meningkatkan ukuran font judul */
-    color: #333; /* Mengubah warna teks */
+    color: #1a237e;
 }
 
 main .page-tatatertib .content-tatatertib {
@@ -468,6 +471,7 @@ main .page-tatatertib .content-tatatertib .kerapihan-mobile img {
     height: 450px;
     object-fit: cover;
 }
+
 
 
 /* footer */
@@ -664,26 +668,28 @@ footer .content-wrapper .sosial-media small{
     }
 }
 
-.page-modul {
+
+/* page modul */
+main .page-modul {
     padding: 120px 5% 40px;
     min-height: 100vh;
     background-color: #f8fafc;
 }
 
-.content-description {
+.content-modul {
     text-align: center;
     margin-bottom: 60px;
     padding: 0 20px;
 }
 
-.content-description .title {
+.content-modul .title {
     font-size: 2.8em;
     color: #1a237e;
     margin-bottom: 15px;
     font-weight: 700;
 }
 
-.content-description .subtitle {
+.content-modul .subtitle {
     color: #64748b;
     font-size: 1.1em;
     margin-bottom: 30px;
@@ -827,7 +833,7 @@ footer .content-wrapper .sosial-media small{
         padding: 100px 20px 40px;
     }
 
-    .content-description .title {
+    .content-modul .title {
         font-size: 2em;
     }
 

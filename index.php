@@ -7,7 +7,7 @@
         <title>Ak-Menengah</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
 
-        <link rel="stylesheet" href="assets/css/app.css?v=1.3">
+        <link rel="stylesheet" href="assets/css/app.css?<?= time(); ?>">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,20 +17,20 @@
     </head>
     <body>
         <header class="navbar-container1" id="navbar">
-            <div class="logo">
-                <img src="assets/img/logo.png" alt="logo lab">
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="tatatertib.php">Tata Tertib</a></li>
-                <li><a href="modul.php">Modul</a></li>
-                <li><a href="software.php">Software</a></li>
-            </ul>
-            <div class="menu-toggle">
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-            </div>
+          <div class="logo">
+              <img src="assets/img/logo.png" alt="logo lab">
+          </div>
+          <ul class="nav-links">
+              <li><a href="index.php">Home</a></li>
+              <li><a href="tatatertib.php">Tata Tertib</a></li>
+              <li><a href="modul.php">Modul</a></li>
+              <li><a href="software.php">Software</a></li>
+          </ul>
+          <div class="menu-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
         </header>
 
         <main>
@@ -41,20 +41,20 @@
                 <p>
                   Laboratorium Akuntansi Menengah berada di bawah naungan Fakultas Ekonomi Universitas Gunadarma. Didirikan untuk menunjang praktikum Mata Kuliah.
                 </p>
-                <a href="#more"><button>Kenalan Yuk!</button></a>
+                <a href="modul"><button>Download Modul!</button></a>
               </div>
               <div class="content-image">
                 <img src="assets/img/img1.png" alt="Laboratorium Informatika" />
               </div>
             </div>
-            <span id="more"></span>
-            
+
             <!-- content 2 -->
             <div  class="content2" >
               <div class="content-description">
                 <h1 class="title">Tentang Kami</h1>
                 <p>
-                  Seiring dengan berjalannya waktu, saat ini Laboratorium Akuntansi Menengah telah membuat modul Praktikum serta mengaplikasikannya dengan Software Akuntansi Zahir yang digunakan dalam menunjang proses pembelajaran.
+                  Seiring dengan berjalannya waktu, saat ini Laboratorium Akuntansi Menengah telah membuat modul Praktikum serta mengaplikasikannya dengan Software Akuntansi Zahir yang digunakan dalam menunjang proses pembelajaran. 
+                  Dengan mengedepankan penggunaan Software Akuntansi diharapkan mampu untuk meningkatkan keterampilan dan kemampuan dalam penguasaan Teknologi.
                 </p>
                 <a href="software.php"><button>Install Sekarang</button></a>
               </div>
@@ -111,6 +111,6 @@
             </div>
           </footer>
 
-          <script src="assets/js/main.js?v=1.0"></script>
+          <script src="assets/js/main.js?<?= time(); ?>"></script>
     </body>
 </html>

@@ -13,7 +13,7 @@
         <title>Ak-Menengah</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
 
-        <link rel="stylesheet" href="assets/css/app.css?v=1.4">
+        <link rel="stylesheet" href="assets/css/app.css?<?= time(); ?>">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,12 +26,12 @@
             <div class="logo">
                 <img src="assets/img/logo.png" alt="logo lab">
             </div>
-            <ul class="nav-links">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="tatatertib.php">Tata Tertib</a></li>
-                <li><a href="modul.php">Modul</a></li>
-                <li><a href="software.php">Software</a></li>
-            </ul>
+           <ul class="nav-links">
+              <li><a href="index.php">Home</a></li>
+              <li><a href="tatatertib.php">Tata Tertib</a></li>
+              <li><a href="modul.php">Modul</a></li>
+              <li><a href="software.php">Software</a></li>
+          </ul>
             <div class="menu-toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -41,7 +41,7 @@
 
         <main>
             <div class="page-modul">
-                <div class="content-description">
+                <div class="content-modul">
                     <h1 class="title">Modul Praktikum</h1>
                     <p class="subtitle">Pilih dan download modul yang Anda butuhkan</p>
                     <div class="search-container">
@@ -96,25 +96,14 @@
             <div class="content-wrapper" id="about">  
                 <img src="assets/img/logo2.png" alt="logo lab">
                 <p>Universitas Gunadarma Kampus E <br><br> <b>Jl. Komjen.Pol.M.Jasin No.9, Tugu, Kec. Cimanggis, Kota Depok, Jawa Barat 16451</b></p>
+                 <div class="sosial-media">
+                    <small><i class="fab fa-instagram"></i> labamen_ug</small>            
+                    <small><i class="far fa-envelope"></i> labamendepok@gmail.com</small>            
+              </div>
             </div>
         </footer>
 
-        <script src="assets/js/main.js?v=1.0"></script>
-        <script>
-            // Simple search functionality
-            document.getElementById('searchModul').addEventListener('input', function(e) {
-                const searchTerm = e.target.value.toLowerCase();
-                const modulItems = document.querySelectorAll('.modul-item');
-                
-                modulItems.forEach(item => {
-                    const title = item.querySelector('h3').textContent.toLowerCase();
-                    if (title.includes(searchTerm)) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        </script>
+        <script src="assets/js/main.js?<?= time(); ?>"></script>
+
     </body>
 </html>
