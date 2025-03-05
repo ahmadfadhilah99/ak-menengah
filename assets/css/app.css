@@ -214,9 +214,10 @@ main .content .content-image {
 }
 
 main .content .content-image img {
-    width: 500px;
+    width: 680px;
     min-width: 150px;
     margin: auto;
+    margin-right: -150px;
     opacity: 0;
     animation: fadeIn 2s forwards;
 }
@@ -240,7 +241,7 @@ main .content2 .content-description .title {
   
 main .content2 .content-description p {
     padding-bottom: 20px;
-    width: 960px;
+    width: 1020px;
     margin: auto;
     font-size: 1.2rem;
     line-height: 1.7rem;
@@ -661,8 +662,13 @@ footer .content-wrapper .sosial-media small{
     }
 
     main .content .content-image {
-        width: 100%;
+        width: auto;
         order: -1;
+    }
+    
+    main .content .content-image img{
+        width: 400px;
+        margin-right: 0;
     }
 
     /* content 2 */
@@ -671,7 +677,7 @@ footer .content-wrapper .sosial-media small{
     }
 
     main .content2 .content-description p {
-        width: auto;
+        width: 100%;
         font-size: 1rem;
     }
 
