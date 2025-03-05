@@ -36,9 +36,10 @@
 
         <main>
             <!-- Page Tata Tertib -->
-            <div class="page-tatatertib" >
-              <div class="content-description">
+            <div class="page-tatatertib">
+              <div class="title-galeri">
                 <h1 class="title">Tata Tertib</h1>
+                <p class="subtitle">Peraturan dan ketentuan yang berlaku di Laboratorium Ak-Menengah</p>
               </div>
 
               <!-- Kerapihan Desktop-->

@@ -46,6 +46,7 @@
             <div class="page-software" >
               <div class="content-description">
                 <h1 class="title">Software</h1>
+                <p class="subtitle">Dukung Pembelajaran Akuntansi dengan Software yang Tepat</p>
               </div>
               <div class="content-software">
               <?php
