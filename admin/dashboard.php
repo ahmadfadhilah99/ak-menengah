@@ -106,7 +106,7 @@ $jSoftware = mysqli_fetch_assoc($software);
                     <span>Software</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="galeri/listImage.php">
+                <a class="nav-link" href="galeri/listGaleri.php">
                     <i class="fas fa-fw fa-image"></i>
                     <span>Galeri</span></a>
             </li>

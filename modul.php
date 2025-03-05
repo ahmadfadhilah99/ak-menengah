@@ -31,6 +31,7 @@
               <li><a href="tatatertib.php">Tata Tertib</a></li>
               <li><a href="modul.php">Modul</a></li>
               <li><a href="software.php">Software</a></li>
+              <li><a href="galeri.php" class="active">Galeri</a></li>
           </ul>
             <div class="menu-toggle">
                 <span class="bar"></span>

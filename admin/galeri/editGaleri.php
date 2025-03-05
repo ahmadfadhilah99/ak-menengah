@@ -1,7 +1,58 @@
 <?php
     include_once('../../koneksi/config.php');
 
-    // $dataModul = mysqli_query($mysqli, "SELECT * FROM tbl_modul;");
+    $id = $_GET['id'];
+    $select = mysqli_query($mysqli, "SELECT * FROM tbl_galeri WHERE id = $id");
+
+    if (isset($_POST['edit'])) {
+        $id = $_POST['id'];
+        $judul = $_POST['judul'];
+        $deskripsi = $_POST['deskripsi'];
+        $status = $_POST['status'];
+        $gambar_lama = $_POST['gambar_lama'];
+
+        // Cek apakah ada gambar baru
+        $allowed_extensions = ['png', 'jpg', 'jpeg', 'svg'];
+        $gambar_baru = $_FILES['gambar_baru']['name'];
+        $image_ext = strtolower(pathinfo($gambar_baru, PATHINFO_EXTENSION));
+        $image_size = $_FILES['gambar_baru']['size'];
+        $image_tmp = $_FILES['gambar_baru']['tmp_name'];
+
+        if ($gambar_baru == '') {
+            // Update data tanpa gambar baru
+            $query = mysqli_query($mysqli, "UPDATE `tbl_galeri` SET 
+                `judul` = '$judul',
+                `deskripsi` = '$deskripsi',
+                `status` = '$status'
+                WHERE `id` = '$id'");
+        } else {
+            if (in_array($image_ext, $allowed_extensions)) {
+                if ($image_size < 1044070) {
+                    move_uploaded_file($image_tmp, '../../assets/img/galeri/' . $gambar_baru);
+                    
+                    // Hapus gambar lama jika ada
+                    if (!empty($gambar_lama) && file_exists('../../assets/img/galeri/' . $gambar_lama)) {
+                        unlink('../../assets/img/galeri/' . $gambar_lama);
+                    }
+                    
+                    $query = mysqli_query($mysqli, "UPDATE `tbl_galeri` SET 
+                        `judul` = '$judul',
+                        `deskripsi` = '$deskripsi',
+                        `status` = '$status',
+                        `image` = '$gambar_baru'
+                        WHERE `id` = '$id'");
+                } else {
+                    echo "<script>alert('Ukuran file terlalu besar!');</script>";
+                    exit;
+                }
+            } else {
+                echo "<script>alert('Format file tidak diizinkan!');</script>";
+                exit;
+            }
+        }
+
+        header('location:listGaleri.php?pesan=berhasiledit');
+    }
 ?>
 
 
@@ -27,10 +78,6 @@
 
     <!-- Custom styles for this template-->
     <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
-    
-     <!-- Custom styles for this page -->
-     <link href="../../assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
 
 </head>
 
@@ -97,18 +144,18 @@
                     <i class="fas fa-fw fa-book"></i>
                     <span>Modul</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="../software/listSoftware.php">
                     <i class="fas fa-fw fa-desktop"></i>
                     <span>Software</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="listImage.php">
+            <li class="nav-item">
+                <a class="nav-link" href="listGaleri.php">
                     <i class="fas fa-fw fa-image"></i>
                     <span>Galeri</span></a>
             </li>
 
-<!-- Divider -->
+            <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -165,18 +212,73 @@
                 <!-- End of Topbar -->
 
                  <!-- Begin Page Content -->
-                 <div class="container-fluid" style="margin-top: 100px;">
+                 <div class="container-fluid">
 
-                    <!-- 404 Error Text -->
-                    <div class="text-center">
-                        <div class="error mx-auto" data-text="404">404</div>
-                        <p class="lead text-gray-800 mb-5">Page Not Found</p>
-                        <a href="../dashboard.php">&larr; Back to dashboard</a>
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Edit Album Galeri</h1>
                     </div>
+
+                    <!-- Edit Galeri -->
+                    <?php
+                        while ($galeri = mysqli_fetch_array($select)) {
+                    ?>
+                    <form action="editGaleri.php?id=<?= $galeri['id'] ?>" method="POST" enctype="multipart/form-data">
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <a href="listGaleri.php" class="mb-2 btn btn-secondary">Kembali <i class="fas fa-fw fa-arrow-right"></i></a>
+                                <div class="card shadow mb-4">
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <input type="hidden" name="id" value="<?= $galeri['id'] ?>">
+                                            <div class="col-md-12">
+                                                <label for="formJudul" class="form-label">Judul Album</label>
+                                                <input type="text" class="form-control" id="formJudul" name="judul" value="<?= htmlspecialchars($galeri['judul']) ?>" required>
+                                            </div>
+                                            <div class="col-md-12 mt-4">
+                                                <label for="formDeskripsi" class="form-label">Deskripsi</label>
+                                                <textarea class="form-control" id="formDeskripsi" name="deskripsi" rows="4" required><?= htmlspecialchars($galeri['deskripsi']) ?></textarea>
+                                            </div>
+                                            <div class="col-md-12 mt-4">
+                                                <label for="formStatus" class="form-label">Status</label>
+                                                <select class="form-control" id="formStatus" name="status" required>
+                                                    <option value="aktif" <?= $galeri['status'] == 'aktif' ? 'selected' : '' ?>>Aktif</option>
+                                                    <option value="nonaktif" <?= $galeri['status'] == 'nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card shadow mb-4">
+                                    <div class="card-body">
+                                        <div class="text-center mb-3">
+                                            <img src="../../assets/img/galeri/<?= $galeri['image'] ?>" alt="Cover Album" class="img-fluid" style="max-height: 200px;">
+                                            <input type="hidden" name="gambar_lama" value="<?= $galeri['image'] ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formImage">Ganti Cover Album</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="formImage" name="gambar_baru">
+                                                <label class="custom-file-label" for="formImage">Pilih file...</label>
+                                            </div>
+                                            <small class="form-text text-muted">Format: PNG, JPG, JPEG, SVG. Maksimal 1MB</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" name="edit" class="btn btn-warning">Update Album</button>
+                            </div>
+                        </div>
+                    </form>
+                    <?php
+                        }
+                    ?>
 
                 </div>
                 <!-- /.container-fluid -->
-
 
             </div>
             <!-- End of Main Content -->
@@ -233,12 +335,19 @@
     <script src="../../assets/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../../assets/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../../assets/vendor/chart.js/Chart.min.js"></script>
 
-      <!-- Page level custom scripts -->
-    <script src="../../assets/js/demo/datatables-demo.js"></script>
-
+    <!-- Page level custom scripts -->
+    <script src="../../assets/js/demo/chart-area-demo.js"></script>
+    <script src="../../assets/js/demo/chart-pie-demo.js"></script>
+    
+    
+    <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 </body>
 
 </html>
