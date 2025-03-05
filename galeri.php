@@ -50,11 +50,12 @@
 
         <style>
             .photos-grid {
-                display: grid;
-                grid-template-columns: repeat(6, 1fr);
-                grid-auto-rows: 100px;
-                gap: 10px;
+                columns: 4 300px;
+                column-gap: 20px;
                 padding: 20px;
+                width: 100%;
+                max-width: 1400px;
+                margin: 0 auto;
             }
 
             .photo-item {
@@ -63,6 +64,11 @@
                 border-radius: 8px;
                 box-shadow: 0 4px 15px rgba(0,0,0,0.1);
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                break-inside: avoid;
+                margin-bottom: 20px;
+                display: inline-block;
+                width: 100%;
+                max-width: 100%;
             }
 
             .photo-item:hover {
@@ -71,65 +77,17 @@
                 z-index: 2;
             }
 
-            /* Pola abstrak untuk ukuran foto */
-            .photo-item:nth-child(12n+1) {
-                grid-column: span 3;
-                grid-row: span 3;
-            }
-
-            .photo-item:nth-child(12n+2) {
-                grid-column: span 2;
-                grid-row: span 2;
-            }
-
+            /* Menghapus pola grid yang lama */
+            .photo-item:nth-child(6n+1),
+            .photo-item:nth-child(6n+2),
+            .photo-item:nth-child(6n+3),
+            .photo-item:nth-child(6n+4),
+            .photo-item:nth-child(6n+5),
+            .photo-item:nth-child(6n),
             .photo-item:nth-child(12n+3) {
-                grid-column: span 1;
-                grid-row: span 2;
-            }
-
-            .photo-item:nth-child(12n+4) {
-                grid-column: span 2;
-                grid-row: span 3;
-            }
-
-            .photo-item:nth-child(12n+5) {
-                grid-column: span 3;
-                grid-row: span 2;
-            }
-
-            .photo-item:nth-child(12n+6) {
-                grid-column: span 1;
-                grid-row: span 3;
-            }
-
-            .photo-item:nth-child(12n+7) {
-                grid-column: span 2;
-                grid-row: span 2;
-            }
-
-            .photo-item:nth-child(12n+8) {
-                grid-column: span 2;
-                grid-row: span 3;
-            }
-
-            .photo-item:nth-child(12n+9) {
-                grid-column: span 3;
-                grid-row: span 2;
-            }
-
-            .photo-item:nth-child(12n+10) {
-                grid-column: span 1;
-                grid-row: span 2;
-            }
-
-            .photo-item:nth-child(12n+11) {
-                grid-column: span 2;
-                grid-row: span 2;
-            }
-
-            .photo-item:nth-child(12n) {
-                grid-column: span 3;
-                grid-row: span 3;
+                grid-column: auto;
+                grid-row: auto;
+                margin: 0;
             }
 
             .photo-item img {
@@ -137,6 +95,25 @@
                 height: 100%;
                 object-fit: cover;
                 transition: transform 0.5s ease;
+                display: block;
+                object-position: center;
+                background-color: #f5f5f5;
+            }
+
+            .photo-item a {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            .photo-item a img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+                display: block;
+                object-position: center;
+                background-color: #f5f5f5;
             }
 
             .photo-item:hover img {
@@ -181,36 +158,66 @@
 
             @media (max-width: 1200px) {
                 .photos-grid {
-                    grid-template-columns: repeat(4, 1fr);
+                    columns: 3 300px;
+                    padding: 15px;
                 }
             }
 
             @media (max-width: 768px) {
                 .photos-grid {
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 8px;
-                    padding: 10px;
-                }
-
-                .photo-item:nth-child(n) {
-                    grid-column: span 1;
-                    grid-row: span 2;
-                }
-
-                .photo-item:nth-child(4n+1) {
-                    grid-column: span 2;
-                    grid-row: span 2;
+                    columns: 2 300px;
+                    column-gap: 15px;
+                    padding: 15px;
+                    width: 95%;
                 }
             }
 
             @media (max-width: 480px) {
                 .photos-grid {
-                    grid-template-columns: 1fr;
+                    columns: 2 180px;
+                    column-gap: 12px;
+                    padding: 12px;
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: flex-start;
                 }
 
-                .photo-item:nth-child(n) {
-                    grid-column: span 1;
-                    grid-row: span 2;
+                .photo-item {
+                    margin-bottom: 12px;
+                    width: calc(50% - 6px);
+                    max-width: none;
+                    margin-left: 3px;
+                    margin-right: 3px;
+                    border-radius: 6px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                }
+
+                .photo-item:hover {
+                    transform: none;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                }
+
+                .photo-item img {
+                    border-radius: 6px;
+                }
+
+                .photo-caption {
+                    display: none;
+                }
+
+                .photo-item a {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                }
+
+                .photo-item a img {
+                    width: 100%;
+                    height: auto;
+                    aspect-ratio: 1;
+                    object-fit: cover;
                 }
             }
         </style>
