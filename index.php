@@ -124,24 +124,38 @@
             <img src="assets/img/whatsapp-logo.png" alt="whatsapp" class="whatsapp-icon">
             <div class="whatsapp-dropdown">
               <a href="https://wa.me/628123456789" class="whatsapp-contact" target="_blank">
-                <img src="assets/img/avatar1.jpg" alt="Customer Service 1">
+                <img src="assets/img/admin-icon.png" alt="Admin Depok">
                 <div class="contact-info">
-                  <span class="contact-name">Lisa Amanda</span>
-                  <span class="contact-title">Customer Service</span>
+                  <span class="contact-name">Amanda</span>
+                  <span class="contact-title">Admin 1 Depok</span>
                 </div>
               </a>
               <a href="https://wa.me/628234567890" class="whatsapp-contact" target="_blank">
-                <img src="assets/img/avatar2.jpg" alt="Customer Service 2">
+                <img src="assets/img/admin-icon.png" alt="Admin Depok">
                 <div class="contact-info">
-                  <span class="contact-name">Budi Santoso</span>
-                  <span class="contact-title">Sales Support</span>
+                  <span class="contact-name">Princecylla</span>
+                  <span class="contact-title">Admin 2 Depok</span>
                 </div>
               </a>
               <a href="https://wa.me/628345678901" class="whatsapp-contact" target="_blank">
-                <img src="assets/img/avatar3.jpg" alt="Technical Support">
+                <img src="assets/img/admin-icon.png" alt="Admin Karawaci">
                 <div class="contact-info">
-                  <span class="contact-name">Ahmad Rizki</span>
-                  <span class="contact-title">Technical Support</span>
+                  <span class="contact-name">Selzha</span>
+                  <span class="contact-title">Admin Karawaci</span>
+                </div>
+              </a>
+              <a href="https://wa.me/628345678901" class="whatsapp-contact" target="_blank">
+                <img src="assets/img/admin-icon.png" alt="Admin Karawaci">
+                <div class="contact-info">
+                  <span class="contact-name">Firda</span>
+                  <span class="contact-title">Admin 1 Kalimalang</span>
+                </div>
+              </a>
+              <a href="https://wa.me/628345678901" class="whatsapp-contact" target="_blank">
+                <img src="assets/img/admin-icon.png" alt="Admin Karawaci">
+                <div class="contact-info">
+                  <span class="contact-name">Syifa</span>
+                  <span class="contact-title">Admin 2 Kalimalang</span>
                 </div>
               </a>
             </div>

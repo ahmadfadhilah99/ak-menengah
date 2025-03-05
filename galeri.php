@@ -356,9 +356,6 @@
               <img src="assets/img/logo2.png" alt="logo lab">
               <p>Universitas Gunadarma Kampus E <br><br> <b>Jl. Komjen.Pol.M.Jasin No.9, Tugu, Kec. Cimanggis, Kota Depok, Jawa Barat 16451</b></p>
             </div>
-            <div class="footer-bottom">
-              <p>&copy; <?= date('Y') ?> Laboratorium Ak-Menengah Universitas Gunadarma. All Rights Reserved.</p>
-            </div>
           </footer>
 
           <!-- Scripts -->
