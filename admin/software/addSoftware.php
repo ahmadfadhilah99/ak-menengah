@@ -138,7 +138,7 @@
                     <span>Software</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../galeri/listImage.php">
+                <a class="nav-link" href="../galeri/listGaleri.php">
                     <i class="fas fa-fw fa-image"></i>
                     <span>Galeri</span></a>
             </li>
@@ -204,7 +204,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Tambah Modul</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Tambah Software</h1>
                     </div>
 
                     <!-- Tambah Software Praktikan -->
